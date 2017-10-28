@@ -1,9 +1,14 @@
+/*import Google Fonts*/
+@import url('https://fonts.googleapis.com/css?family=Shrikhand');
+
 /*reset browsers default behavior*/
 html, body, main {
     box-sizing: border-box;
     height: 100%;
     padding: 0;
     margin: 0;
+    font-family: Shrikhand;
+    background: linear-gradient(to bottom right, #283E56, #1989AC);
 }
 
 *, *:before, *:after {
@@ -12,41 +17,102 @@ html, body, main {
     -moz-box-sizing: border-box;
 }
 
-* {
-    border: 1px solid black;
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+
+    /*styling page's header*/
+    header {
+        height: 30%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .tittle{
+        width: 80%;
+        text-align: center;
+        color: #FFDE25;
+    }
+
+    span {
+        font-size: 48px;
+    }
+
+    /*stying page's images*/
+    .central-container {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    #img-diver {
+        height: 60%;
+        width: auto;
+    }
+
+    #img-shark {
+        height: 90%;
+        width: auto;
+    }
+
+    /*stying page's footer*/
+    footer {
+        height: 20%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-play {
+        height: 70%;
+        min-height: 30px;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 20%;
+        border: 5px solid white;
+        background-color: #1989AC;
+        color: #FFDE25;
+        box-shadow: 0 5px #aaa;
+    }
+
+    .btn-play:hover {
+        background-color: rgb(34, 178, 221);
+    }
+
+    .btn-play:active {
+        top: 5px;
+        box-shadow: none;
+    }
+
+    .fa, .fa span {
+        font-size: 32px;
+    }
+
+    .fa span {
+        font-family: Shrikhand;
+    }
 }
 
-/*styling*/
-header {
-    height: 20%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+/* Large desktop */
+@media (min-width: 1200px) { 
+    /* your code */
+}
+   
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) { 
+/* your code */
 }
 
-.tittle{
-    height: 70%;
-    width: 80%;
-}
-
-.central-container {
-    height: 60%;
-    width: 100%;
-}
-
-footer {
-    height: 20%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.btn-play {
-    height: 70%;
-    min-height: 30px;
-    width: 30%;
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) { 
+/* your code */
 }
