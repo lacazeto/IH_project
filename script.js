@@ -3,11 +3,14 @@ function drawLandingPage(){
 }
 
 function drawGamingPage(){
-    
+    setTimeout(function(){
+        document.body.innerHTML = "";
+        /*draw new page*/
+    }, 1000);
 }
 
 window.onload = function () {
     drawLandingPage();
     var button = document.getElementsByClassName("btn-play");
-    button.addEventListener("click", drawGamingPage);
+    button[0].addEventListener("click", drawGamingPage);
 };
