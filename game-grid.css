@@ -1,3 +1,21 @@
+/*reset browsers default behavior*/
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Styling Game's grid table */ 
 .background    { background: rgb(52, 166, 251);
     table-layout: fixed;
@@ -6,4 +24,26 @@
 
 .background td { 
     padding: 0;
+}
+
+.game {
+    height: 60vh;
+}
+
+.player, .shark, .treasure{
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.player {
+    background-image: url("images/Diver1.png");
+}
+
+.shark {
+    background-image: url("images/animated-shark-1.png");
+}
+
+.treasure {
+    background-image: url("images/treasur_full.png");
 }
