@@ -23,7 +23,7 @@ body {
     font-size: 10px;
 }
 
-/*styling landing page*/
+/*LANDING PAGE*/
 
 .wrapper-landing {
     display: flex;
@@ -60,6 +60,8 @@ body {
 .splash-footer {
     display: flex;
     justify-content: center;
+    margin-bottom: 5%;
+    min-height: 50px;
 }
 
 .btn {
@@ -84,7 +86,7 @@ body {
     box-shadow: none;
 }
 
-/*styling game's page*/
+/*GAMING PAGE*/
 
 .wrapper-game {
     display: flex;
@@ -96,12 +98,16 @@ body {
 .stats-btns {
     display: flex;
     align-content: center;
-    justify-content: space-around;
+    justify-content: flex-end;
+    margin-right: 10%;
+    font-size: 2em;
+    color: white;
 }
 
 header #lives {
     font-size: 2em;
     color: white;
+    margin-right: 5%;
 }
 
 #game {

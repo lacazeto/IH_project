@@ -2,6 +2,11 @@
 
 var newLevel = null;
 
+function reset () {
+    clearInterval(newLevel.intervalID);
+    init();
+}
+
 function drawLandingPage() {
     document.body.innerHTML = 
     `<div class='wrapper-landing'>
@@ -28,7 +33,7 @@ function drawGamingPage() {
     setTimeout(function () {
         document.body.innerHTML = 
         `<div class="wrapper-game">
-            <header class="stats-btns">
+            <header class="stats-btns">Lives: 
                 <div id="lives">3</div>
                 <div><button id="btn">Reset</button></div>
             </header>
@@ -42,6 +47,8 @@ function drawGamingPage() {
         var grid = document.getElementById("game");
         newLevel = new Level(grid);
         newLevel.startGame();
+        var resetBtn = document.getElementById("btn");
+        resetBtn.addEventListener("click", reset);
     }, 1000);
 }
 
