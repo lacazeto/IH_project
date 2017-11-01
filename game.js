@@ -15,6 +15,7 @@ function Level(gridElement) {
     self.scale = 60;
     self.gridContainer = null;
     self.direction = -1;
+    self.playerLives = 3;
 
     //create a DOM element and assign its class
     self.domElement = function (name, className) {
@@ -71,7 +72,17 @@ function Level(gridElement) {
                     actor.style.width = self.scale + "px";
                     actor.style.height = self.scale + "px";
                     actor.style.left = self.scale + "px";
-                    actor.style.top = self.scale + "px"; 
+                    actor.style.top = self.scale + "px";
+                    if(actor.className === "actor treasure"){
+                        switch(self.hasTreasure){
+                            case true:
+                                actor.style.backgroundImage = 'url("images/treasur_emp.png")';
+                            break;
+                            case false:
+                                actor.style.backgroundImage = 'url("images/treasur_full.png")';
+                            break;
+                        }
+                    } 
                 }
             }
         }
@@ -87,6 +98,8 @@ function Level(gridElement) {
 
     self.updateDomDisplay = function(){
         self.removeGrid();
+        self.checkTreasure();
+        self.checkLifeLost(self.shark1Pos, self.shark2Pos);
         self.moveSharks();
         self.createBlankGrid();
         self.labelGrid();
@@ -94,7 +107,9 @@ function Level(gridElement) {
     };
 
     self.checkTreasure = function(){
-
+        if(self.playerPos[0] === self.treasurePos[0] && self.playerPos[1] === self.treasurePos[1]){
+            self.hasTreasure = true;
+        }
     };
 
     self.moveSharks = function(){
@@ -105,14 +120,34 @@ function Level(gridElement) {
             self.direction = -1;
         }
         self.shark1Pos[1] += self.direction;
-        self.shark2Pos[1] += self.direction*1,2;
+        self.shark2Pos[1] += self.direction;
     };
+
+    self.resetDeadPlayer = function(){
+        self.hasTreasure = false;
+        self.playerPos = [0, self.columns/2];
+    };
+
+    self.checkLifeLost = function (element1, element2){
+        var arrElements = [element1, element2];
+        for(var i = 0; i<arrElements.length; i++){
+            if(self.playerPos[0] === arrElements[i][0] && self.playerPos[1] === arrElements[i][1]){
+                self.playerLives--;
+                self.gameOver();
+                self.resetDeadPlayer();
+            }
+        }
+    };
+/* 
+    self.displayScore = function(){
+
+    }; */
 
     self.removeGrid = function(){
         var node = document.getElementsByClassName("game-grid");
         var nodeChild = document.getElementsByClassName("background");
         node[0].removeChild(nodeChild[0]);
-    }
+    };
 
     self.movePlayer = function(event){
         switch (event.keyCode){
@@ -139,7 +174,16 @@ function Level(gridElement) {
         }
     };
 
-    self.check 
+    self.gameOver = function (){
+        if(self.playerLives < 1){
+            clearInterval(self.intervalID);
+            alert("GAME OVER");
+        }
+    };
+
+    self.gameWon = function (){
+
+    };
 
     self.startGame = function(){
         self.domDisplay();

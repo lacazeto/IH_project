@@ -29,7 +29,7 @@ body {
 }
 
 #game {
-    height: 60vh;
+    height: inherit;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -56,8 +56,4 @@ body {
 .shark {    
     background-size: 100%;
     background-image: url("images/animated-shark-1.png");
-}
-
-.treasure {
-    background-image: url("images/treasur_full.png");
 }
