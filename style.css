@@ -13,33 +13,34 @@ html {
     box-sizing: inherit;
 }
 
-/*styling*/
+
 body {
     margin: 0;
-    padding: 0;
+    overflow:hidden;
     height: 100vh;
     font-family: Shrikhand;
     background: linear-gradient(to bottom right, #283E56, #1989AC);
+    font-size: 10px;
 }
 
-header {
-    height: 20%;
+/*styling landing page*/
+
+.wrapper-landing {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%
 }
 
 .title {
     text-align: center;
     color: #FFDE25;
-    font-size: 48px;
-}
-
-main {
-    height: 60%;
+    font-size: 5em;
 }
 
 /*styling page's images*/
 .central-container {
     display: flex;
-    height: 100%;
     align-items: center;
     justify-content: space-between;
 }
@@ -61,14 +62,17 @@ main {
     justify-content: center;
 }
 
-.btn-play {
-    height: 70%;
+.btn {
     border-radius: 20%;
     border: 5px solid white;
     background-color: #1989AC;
     color: #FFDE25;
     box-shadow: 0 5px #aaa;
-    font-size: 32px;
+    font-size: 3em;
+}
+
+.btn-play{
+    max-height: 80px;
 }
 
 .btn-play:hover {
@@ -78,4 +82,76 @@ main {
 .btn-play:active {
     top: 5px;
     box-shadow: none;
+}
+
+/*styling game's page*/
+
+.wrapper-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%
+}
+
+.stats-btns {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+}
+
+header #lives {
+    font-size: 2em;
+    color: white;
+}
+
+#game {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 3%;
+}
+
+.game-grid {
+    background-image: url("images/sea1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: #FFDE25 3px solid;
+    border-radius: 5%;
+}
+
+#img-boat{
+    width: 34%;
+    position: absolute;
+    top: -56px;
+    left: -21px
+}
+
+/* Styling Game's grid table */ 
+.background    { 
+    table-layout: fixed;
+    overflow: hidden;
+    width: 80%;
+    height: auto;
+    border-spacing: 0;
+}
+
+.background td { 
+    padding: 0;
+}
+
+.player, .shark, .treasure{
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+.player {
+    background-image: url("images/Diver1.png");
+}
+
+.shark {    
+    background-size: 100%;
+    background-image: url("images/animated-shark-1.png");
 }

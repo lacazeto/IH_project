@@ -12,7 +12,7 @@ function Level(gridElement) {
     self.gridLine = [];
     self.intervalID = null;
     self.hasTreasure = false;
-    self.scale = 60;
+    self.scale = 55;
     self.gridContainer = null;
     self.direction = -1;
     self.playerLives = 3;
@@ -100,6 +100,7 @@ function Level(gridElement) {
         self.removeGrid();
         self.checkTreasure();
         self.checkLifeLost(self.shark1Pos, self.shark2Pos);
+        self.gameWon();
         self.moveSharks();
         self.createBlankGrid();
         self.labelGrid();
@@ -182,13 +183,29 @@ function Level(gridElement) {
     };
 
     self.gameWon = function (){
+        if(self.playerPos[0] === 0 && self.playerPos[1] <= 2 && self.hasTreasure === true){
+            clearInterval(self.intervalID);
+            alert("YOU WON");
+        }
+    };
 
+    self.rescale = function(){
+        var table = document.getElementsByClassName("background");
+        var tableHeight = table[0].offsetHeight; 
+        console.log(tableHeight);
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        console.log(height);
+        if(tableHeight <= 0.9*height){
+            self.scale = width/12.78;
+        }
     };
 
     self.startGame = function(){
         self.domDisplay();
         self.intervalID = setInterval(self.updateDomDisplay, 100);
         document.addEventListener("keydown", self.movePlayer);
+        window.onresize = self.rescale;
     };
 
 }

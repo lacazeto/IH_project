@@ -1,26 +1,28 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Treasure Hunter!</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">        
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="game-grid.css">
 
-    </head>
-    <body class="gaming-page">
-        <header>
-            <div class="score"></div>
-            <div class="lives"></div>
+<head>
+    <title>Treasure Hunter!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="game.js" defer></script>
+    <script type="text/javascript" src="init.js" defer></script>
+</head>
+
+<body>
+    <div class="wrapper-game">
+        <header class="stats-btns">
+            <div id="lives">3</div>
+            <div><button id="btn">Reset</button></div>
         </header>
         <main id="game">
+            <div>
+                <img id="img-boat" src="images/boat.png" alt="boat">
+            </div>
 
         </main>
-        <footer>
-            <div class="btn-reset">
-            </div>
-        </footer>
-        <script type="text/javascript" src="game.js"></script>
-        <script type="text/javascript" src="init.js"></script>
-    </body>
+    </div>
+</body>
+
 </html>
