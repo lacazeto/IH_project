@@ -35,13 +35,9 @@ function drawGamingPage() {
         `<div class="wrapper-game">
             <header class="stats-btns">Lives: 
                 <div id="lives">3</div>
-                <div><button id="btn">Reset</button></div>
+                <div><button id="btn">Main Screen</button></div>
             </header>
             <main id="game">
-                <div>
-                    <img id="img-boat" src="images/boat.png" alt="boat">
-                </div>
-    
             </main>
         </div>`;
         var grid = document.getElementById("game");
