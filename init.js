@@ -3,7 +3,7 @@
 var newLevel = null;
 
 function reset () {
-    clearInterval(newLevel.intervalID);
+    newLevel.clearIntervals();
     init();
 }
 
@@ -38,6 +38,7 @@ function drawGamingPage() {
                 <div><button id="btn">Main Screen</button></div>
             </header>
             <main id="game">
+                    <img id='win-game-over' src='images/Game_Over.png' alt='shark'>
             </main>
         </div>`;
         var grid = document.getElementById("game");

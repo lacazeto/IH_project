@@ -120,6 +120,12 @@ header #lives {
     margin-bottom: 3%;
 }
 
+#win-game-over{
+    width: 100%;
+    visibility: hidden;
+    position: absolute;
+}
+
 .game-grid {
     background-image: url("images/sea2.jpg");
     background-repeat: no-repeat;

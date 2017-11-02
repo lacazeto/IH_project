@@ -20,7 +20,7 @@ function Level(gridElement) {
         direction: -1
     }
     self.gridLine = [];
-    self.intervalID = null;
+    self.intervalID = [null, null, null]; 
     self.hasTreasure = false;
     self.scale = 55;
     self.gridContainer = null;
@@ -236,15 +236,26 @@ function Level(gridElement) {
     self.gameOver = function () {
         if (self.playerLives < 1) {
             clearInterval(self.intervalID);
-            alert("GAME OVER");
+            var gameOverImage = document.getElementById("win-game-over");
+            self.intervalID[1] =  setInterval(function () {
+                gameOverImage.style.visibility = "inherit";
+                setTimeout(function () {
+                    gameOverImage.style.visibility = "hidden";
+                },500);
+            },1000);
+            clearInterval(newLevel.intervalID[0]);
+            document.removeEventListener("keydown", self.movePlayer);
         }
     };
 
     //verify if game is won
     self.gameWon = function () {
         if (self.playerPos[0] === 0 && self.playerPos[1] <= 5 && self.hasTreasure === true) {
-            clearInterval(self.intervalID);
-            alert("YOU WON");
+            var gameWon = document.getElementById("win-game-over");
+            gameWon.src = "images/victory.gif";
+            gameWon.style.visibility = "inherit";
+            clearInterval(self.intervalID[0]);
+            document.removeEventListener("keydown", self.movePlayer);
         }
     };
 
@@ -261,9 +272,15 @@ function Level(gridElement) {
         }
     };
 
+    self.clearIntervals = function (){
+        for(var interval = 0; interval < self.intervalID.length; interval++) {
+            clearInterval(self.intervalID[interval]);
+        }
+    };
+
     self.startGame = function () {
         self.domDisplay();
-        self.intervalID = setInterval(function () {
+        self.intervalID[0] = setInterval(function () {
             if (!self.isPaused) {
                 self.updateDomDisplay();
             }
