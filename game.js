@@ -51,16 +51,18 @@ function Level(gridElement) {
             self.gridLine[x].push(fieldType);
         }
         self.addPlayer(self.playerPos);
-        self.addShark(self.shark1.position);
-        self.addShark(self.shark2.position);
+        self.addShark(self.shark1.position, self.shark2.position, self.shark3.position);
         self.addTreasure(self.treasurePos);
 
     };
     self.addPlayer = function (player) {
         self.gridLine[player[0]][player[1]] = "player";
     };
-    self.addShark = function (shark) {
-        self.gridLine[shark[0]][shark[1]] = "shark";
+    self.addShark = function (shark1, shark2, shark3) {
+        var arrSharks = [shark1, shark2, shark3];
+        for (var i = 0; i < arrSharks.length; i++){
+            self.gridLine[arrSharks[i][0]][arrSharks[i][1]] = "shark";
+        }
     };
     self.addTreasure = function (treasure) {
         self.gridLine[treasure[0]][treasure[1]] = "treasure";
@@ -72,7 +74,7 @@ function Level(gridElement) {
         table.style.width = 10 * self.scale + "px";
         var row;
         var element;
-
+        var sharkCounter = 0;
         for (var x = 0; x < self.columns; x++) {
             row = table.appendChild(self.domElement("tr"));
             row.style.height = self.scale + "px";
@@ -95,7 +97,8 @@ function Level(gridElement) {
                         }
                     }
                     if (actor.className === "actor shark") {
-                        self.drawShark(actor);
+                        self.drawShark(actor, sharkCounter);
+                        sharkCounter++;
                     }
                 }
             }
@@ -103,6 +106,7 @@ function Level(gridElement) {
         return table;
     };
 
+    //add grid to the DOM
     self.domDisplay = function () {
         self.gridContainer = self.parent.appendChild(self.domElement("div", "game-grid"));
         self.createBlankGrid();
@@ -110,25 +114,28 @@ function Level(gridElement) {
         self.gridContainer.appendChild(self.drawGrid());
     };
 
+    //updates elements positions and status on the DOM
     self.updateDomDisplay = function () {
         self.removeGrid();
         self.checkTreasure();
-        self.checkForDeath(self.shark1.position, self.shark2.position);
+        self.checkForDeath(self.shark1.position, self.shark2.position, self.shark3.position);
         self.gameWon();
         self.createBlankGrid();
         self.labelGrid();
-        self.moveSharks(self.shark1, self.shark2);
+        self.moveSharks(self.shark1, self.shark2, self.shark3);
         self.gridContainer.appendChild(self.drawGrid());
     };
 
+    //check if player is in possession of the treasure
     self.checkTreasure = function () {
         if (self.playerPos[0] === self.treasurePos[0] && self.playerPos[1] === self.treasurePos[1]) {
             self.hasTreasure = true;
         }
     };
 
-    self.moveSharks = function (shark1, shark2) {
-        var arrSharks = [shark1, shark2];
+    //set sharks new position, based on their direction
+    self.moveSharks = function (shark1, shark2, shark3) {
+        var arrSharks = [shark1, shark2, shark3];
         for (var i = 0; i < arrSharks.length; i++) {
             if (arrSharks[i].position[1] === 0) {
                 arrSharks[i].direction = +1;
@@ -140,29 +147,30 @@ function Level(gridElement) {
         }
     };
 
-    self.drawShark = function (actor) {
-        var arrSharks = [self.shark1, self.shark2];
-        for (var i = 0; i < arrSharks.length; i++) {
-            switch (arrSharks[i].direction) {
+    //add images to shark elements based on their direction
+    self.drawShark = function (actor, counter) {
+        var arrSharks = [self.shark1, self.shark2, self.shark3];
+        switch (arrSharks[counter].direction) {
                 case -1:
                     actor.style.backgroundImage = 'url("images/back-animated-shark-1.png")';
                     break;
                 case 1:
                     actor.style.backgroundImage = 'url("images/animated-shark-1.png")';
                     break;
-            }
         }
     };
 
+    //reset player to initial position
     self.resetDeadPlayer = function () {
         self.hasTreasure = false;
         self.playerPos = [0, self.columns / 2];
     };
 
-    self.checkForDeath = function (element1, element2) {
-        var arrElements = [element1, element2];
-        for (var i = 0; i < arrElements.length; i++) {
-            if (self.playerPos[0] === arrElements[i][0] && self.playerPos[1] === arrElements[i][1]) {
+    //updates DOM elements when player looses life
+    self.checkForDeath = function (shark1, shark2, shark3) {
+        var arrSharks = [shark1, shark2, shark3];
+        for (var i = 0; i < arrSharks.length; i++) {
+            if (self.playerPos[0] === arrSharks[i][0] && self.playerPos[1] === arrSharks[i][1]) {
                 self.playerLives--;
                 self.isPaused = true;
                 self.updateLifesCounter();
@@ -176,17 +184,20 @@ function Level(gridElement) {
         }
     };
 
+    //update lives counter
     self.updateLifesCounter = function () {
         var livesContainer = document.getElementById("lives");
         livesContainer.innerHTML = self.playerLives;
     };
 
+    //delete grid from the DOM
     self.removeGrid = function () {
         var node = document.getElementsByClassName("game-grid");
         var nodeChild = document.getElementsByClassName("background");
         node[0].removeChild(nodeChild[0]);
     };
 
+    //updates player position based on user input
     self.movePlayer = function (event) {
         switch (event.keyCode) {
             case 37:
@@ -212,6 +223,7 @@ function Level(gridElement) {
         }
     };
 
+    //flashes screen
     self.flashScreen = function () {
         self.flash = document.getElementsByTagName("body");
         self.flash[0].firstChild.className = "wrapper-game, flash";
@@ -220,6 +232,7 @@ function Level(gridElement) {
         }, 50);
     };
 
+    //verify if game is over
     self.gameOver = function () {
         if (self.playerLives < 1) {
             clearInterval(self.intervalID);
@@ -227,6 +240,7 @@ function Level(gridElement) {
         }
     };
 
+    //verify if game is won
     self.gameWon = function () {
         if (self.playerPos[0] === 0 && self.playerPos[1] <= 5 && self.hasTreasure === true) {
             clearInterval(self.intervalID);
@@ -234,6 +248,7 @@ function Level(gridElement) {
         }
     };
 
+    //scale the DOM's gaming grid based on the window height
     self.rescale = function () {
         var table = document.getElementById("game");
         var tableHeight = table.offsetHeight;
