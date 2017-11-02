@@ -27,6 +27,7 @@ function Level(gridElement) {
     self.playerLives = 3;
     self.isPaused = false;
     self.flash = null;
+    self.isCoinSound = false;
 
     //create a DOM element and assign its class
     self.domElement = function (name, className) {
@@ -50,10 +51,9 @@ function Level(gridElement) {
             var fieldType = null;
             self.gridLine[x].push(fieldType);
         }
+        self.addTreasure(self.treasurePos);
         self.addPlayer(self.playerPos);
         self.addShark(self.shark1.position, self.shark2.position, self.shark3.position);
-        self.addTreasure(self.treasurePos);
-
     };
     self.addPlayer = function (player) {
         self.gridLine[player[0]][player[1]] = "player";
@@ -130,6 +130,12 @@ function Level(gridElement) {
     self.checkTreasure = function () {
         if (self.playerPos[0] === self.treasurePos[0] && self.playerPos[1] === self.treasurePos[1]) {
             self.hasTreasure = true;
+            if(self.isCoinSound === false){
+                var audio = new Audio("sounds/coin-sound.wav");
+                audio.loop = false;
+                audio.play();
+                self.isCoinSound = true;
+            }
         }
     };
 
@@ -163,6 +169,7 @@ function Level(gridElement) {
     //reset player to initial position
     self.resetDeadPlayer = function () {
         self.hasTreasure = false;
+        self.isCoinSound = false;
         self.playerPos = [0, self.columns / 2];
     };
 
@@ -176,10 +183,13 @@ function Level(gridElement) {
                 self.updateLifesCounter();
                 self.gameOver();
                 self.flashScreen();
+                if(self.playerLives > 0){
+                    new Audio("sounds/drowning-choking.wav").play();
+                }
                 setTimeout(function () {
                     self.isPaused = false;
                     self.resetDeadPlayer();
-                }, 1000);
+                }, 2500);
             }
         }
     };
@@ -243,6 +253,7 @@ function Level(gridElement) {
                     gameOverImage.style.visibility = "hidden";
                 },500);
             },1000);
+            new Audio("sounds/game-over.wav").play();
             clearInterval(newLevel.intervalID[0]);
             document.removeEventListener("keydown", self.movePlayer);
         }
@@ -253,7 +264,9 @@ function Level(gridElement) {
         if (self.playerPos[0] === 0 && self.playerPos[1] <= 5 && self.hasTreasure === true) {
             var gameWon = document.getElementById("win-game-over");
             gameWon.src = "images/victory.gif";
+            gameWon.style.width = "auto";
             gameWon.style.visibility = "inherit";
+            new Audio("sounds/Victory.wav").play();
             clearInterval(self.intervalID[0]);
             document.removeEventListener("keydown", self.movePlayer);
         }
@@ -280,6 +293,7 @@ function Level(gridElement) {
 
     self.startGame = function () {
         self.domDisplay();
+        //new Audio ("sounds/underwater-bubbles.wav").play();
         self.intervalID[0] = setInterval(function () {
             if (!self.isPaused) {
                 self.updateDomDisplay();

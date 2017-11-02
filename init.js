@@ -33,6 +33,7 @@ function drawGamingPage() {
     setTimeout(function () {
         document.body.innerHTML = 
         `<div class="wrapper-game">
+        <embed id="background-sound" src="sounds/underwater-bubbles.mp3" loop="true" hidden="true" autostart="true">
             <header class="stats-btns">Lives: 
                 <div id="lives">3</div>
                 <div><button id="btn">Main Screen</button></div>

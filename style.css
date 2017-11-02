@@ -64,13 +64,17 @@ body {
     min-height: 50px;
 }
 
-.btn {
+.btn, #btn {
     border-radius: 20%;
-    border: 5px solid white;
     background-color: #1989AC;
     color: #FFDE25;
-    box-shadow: 0 5px #aaa;
+    font-family: Shrikhand;
+}
+
+.btn{
     font-size: 3em;
+    box-shadow: 0 5px #aaa;
+    border: 5px solid white;
 }
 
 .btn-play{
