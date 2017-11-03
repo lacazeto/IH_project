@@ -252,6 +252,7 @@ function Level(gridElement) {
             self.backSound.pause();
             var gameOverImage = document.getElementById("win-game-over");
             self.intervalID[1] =  setInterval(function () {
+                gameOverImage.src ="images/Game_Over.png";
                 gameOverImage.style.visibility = "inherit";
                 setTimeout(function () {
                     gameOverImage.style.visibility = "hidden";

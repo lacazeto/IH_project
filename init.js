@@ -60,7 +60,7 @@ function drawGamingPage() {
                 </div>        
             </header>
             <main id="game">
-                    <img id='win-game-over' src='images/Game_Over.png' alt='shark'>
+                    <img id='win-game-over' alt='shark'>
             </main>
         </div>`;
         var grid = document.getElementById("game");
