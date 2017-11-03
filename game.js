@@ -30,6 +30,7 @@ function Level(gridElement) {
     self.isCoinSound = false;
     self.backSound = null;
     self.isBackSound = true;
+    self.victorySound = null;
 
     //create a DOM element and assign its class
     self.domElement = function (name, className) {
@@ -248,6 +249,7 @@ function Level(gridElement) {
     self.gameOver = function () {
         if (self.playerLives < 1) {
             clearInterval(self.intervalID);
+            self.backSound.pause();
             var gameOverImage = document.getElementById("win-game-over");
             self.intervalID[1] =  setInterval(function () {
                 gameOverImage.style.visibility = "inherit";
@@ -265,10 +267,12 @@ function Level(gridElement) {
     self.gameWon = function () {
         if (self.playerPos[0] === 0 && self.playerPos[1] <= 5 && self.hasTreasure === true) {
             var gameWon = document.getElementById("win-game-over");
+            self.backSound.pause();
             gameWon.src = "images/victory.gif";
             gameWon.style.width = "auto";
             gameWon.style.visibility = "inherit";
-            new Audio("sounds/Victory.wav").play();
+            self.victorySound = new Audio("sounds/Victory.wav");
+            self.victorySound.play();
             clearInterval(self.intervalID[0]);
             document.removeEventListener("keydown", self.movePlayer);
         }

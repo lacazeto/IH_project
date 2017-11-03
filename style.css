@@ -64,7 +64,7 @@ body {
     min-height: 50px;
 }
 
-.btn, #btn {
+.btn, #btn-reset {
     border-radius: 20%;
     background-color: #1989AC;
     color: #FFDE25;
@@ -109,7 +109,7 @@ body {
     color: white;
 }
 
-#mute {
+#btn-mute {
     height: 20%;
     margin: 0 25px;
 }

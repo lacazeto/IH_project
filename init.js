@@ -5,6 +5,9 @@ var newLevel = null;
 function reset () {
     newLevel.clearIntervals();
     newLevel.backSound.pause();
+    if(newLevel.victorySound !== null){
+        newLevel.victorySound.pause();
+    }
     init();
 }
 
@@ -31,7 +34,7 @@ function drawLandingPage() {
 }
 
 function mute(){
-    var muteBtn = document.getElementById("mute");
+    var muteBtn = document.getElementById("btn-mute");
     if(newLevel.isBackSound){
         newLevel.backSound.pause();
         newLevel.isBackSound = false;
@@ -50,10 +53,10 @@ function drawGamingPage() {
         `<div class="wrapper-game">
             <header class="stats-btns">
                 <div class="stats-btns">
-                <button id="mute">Mute</button>
+                <button id="btn-mute">Mute</button>
                 Lives:
                     <div id="lives">3</div>
-                    <div><button id="btn">Main Screen</button></div>
+                    <div><button id="btn-reset">Main Screen</button></div>
                 </div>        
             </header>
             <main id="game">
@@ -63,8 +66,8 @@ function drawGamingPage() {
         var grid = document.getElementById("game");
         newLevel = new Level(grid);
         newLevel.startGame();
-        var resetBtn = document.getElementById("btn");
-        var muteBtn = document.getElementById("mute");
+        var resetBtn = document.getElementById("btn-reset");
+        var muteBtn = document.getElementById("btn-mute");
         resetBtn.addEventListener("click", reset);
         muteBtn.addEventListener("click", mute);
     }, 1000);
