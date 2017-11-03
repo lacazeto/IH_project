@@ -293,7 +293,7 @@ function Level(gridElement) {
 
     self.startGame = function () {
         self.domDisplay();
-        var backSound = new Audio ("sounds/underwater-bubbles.mp3");
+        backSound = new Audio ("sounds/underwater-bubbles.mp3");
         backSound.loop = "true";
         backSound.play();
         self.intervalID[0] = setInterval(function () {
