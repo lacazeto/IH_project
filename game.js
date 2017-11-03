@@ -28,6 +28,7 @@ function Level(gridElement) {
     self.isPaused = false;
     self.flash = null;
     self.isCoinSound = false;
+    self.backSound = null;
 
     //create a DOM element and assign its class
     self.domElement = function (name, className) {
@@ -293,9 +294,9 @@ function Level(gridElement) {
 
     self.startGame = function () {
         self.domDisplay();
-        backSound = new Audio ("sounds/underwater-bubbles.mp3");
-        backSound.loop = "true";
-        backSound.play();
+        self.backSound = new Audio ("sounds/underwater-bubbles.mp3");
+        self.backSound.loop = "true";
+        self.backSound.play();
         self.intervalID[0] = setInterval(function () {
             if (!self.isPaused) {
                 self.updateDomDisplay();

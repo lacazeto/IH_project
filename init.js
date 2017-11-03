@@ -5,7 +5,7 @@ var backSound = null;
 
 function reset () {
     newLevel.clearIntervals();
-    backSound.pause();
+    newLevel.backSound.pause();
     init();
 }
 
