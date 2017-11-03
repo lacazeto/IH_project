@@ -277,13 +277,16 @@ function Level(gridElement) {
     self.rescale = function () {
         var table = document.getElementById("game");
         var tableHeight = table.offsetHeight;
+        var tableWidth = table.offsetWidth;
         var width = window.innerWidth;
         var height = window.innerHeight;
-        if (tableHeight <= 0.8 * height) {
-            self.scale = width / 12.78;
-        } else {
-            self.scale -= 3;
+        if (width > height){
+            self.scale = (0.8/10) *  height;
+
         }
+        else {
+            self.scale = (0.8/10) *  width;
+        }      
     };
 
     self.clearIntervals = function (){
