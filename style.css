@@ -101,12 +101,17 @@ body {
 
 .stats-btns {
     display: flex;
-    align-content: center;
+    align-items: center;
     justify-content: flex-end;
     margin-right: 10%;
     width: 80%;
     font-size: 2em;
     color: white;
+}
+
+#mute {
+    height: 20%;
+    margin: 0 25px;
 }
 
 header #lives {

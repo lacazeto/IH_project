@@ -1,7 +1,6 @@
 'use strict';
 
 var newLevel = null;
-var backSound = null;
 
 function reset () {
     newLevel.clearIntervals();
@@ -31,13 +30,31 @@ function drawLandingPage() {
     </div>`;
 }
 
+function mute(){
+    var muteBtn = document.getElementById("mute");
+    if(newLevel.isBackSound){
+        newLevel.backSound.pause();
+        newLevel.isBackSound = false;
+        muteBtn.innerHTML = "Unmute";
+    }
+    else{
+        newLevel.backSound.play();
+        newLevel.isBackSound = true;
+        muteBtn.innerHTML = "Mute";
+    }
+}
+
 function drawGamingPage() {
     setTimeout(function () {
         document.body.innerHTML = 
         `<div class="wrapper-game">
-            <header class="stats-btns">Lives: 
-                <div id="lives">3</div>
-                <div><button id="btn">Main Screen</button></div>
+            <header class="stats-btns">
+                <div class="stats-btns">
+                <button id="mute">Mute</button>
+                Lives:
+                    <div id="lives">3</div>
+                    <div><button id="btn">Main Screen</button></div>
+                </div>        
             </header>
             <main id="game">
                     <img id='win-game-over' src='images/Game_Over.png' alt='shark'>
@@ -47,7 +64,9 @@ function drawGamingPage() {
         newLevel = new Level(grid);
         newLevel.startGame();
         var resetBtn = document.getElementById("btn");
+        var muteBtn = document.getElementById("mute");
         resetBtn.addEventListener("click", reset);
+        muteBtn.addEventListener("click", mute);
     }, 1000);
 }
 

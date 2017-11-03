@@ -29,6 +29,7 @@ function Level(gridElement) {
     self.flash = null;
     self.isCoinSound = false;
     self.backSound = null;
+    self.isBackSound = true;
 
     //create a DOM element and assign its class
     self.domElement = function (name, className) {
