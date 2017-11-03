@@ -276,8 +276,6 @@ function Level(gridElement) {
     //scale the DOM's gaming grid based on the window height
     self.rescale = function () {
         var table = document.getElementById("game");
-        var tableHeight = table.offsetHeight;
-        var tableWidth = table.offsetWidth;
         var width = window.innerWidth;
         var height = window.innerHeight;
         if (width > height){
