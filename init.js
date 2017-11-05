@@ -1,8 +1,10 @@
 'use strict';
 
 var newLevel = null;
+var isGameStarted = false;
 
 function reset () {
+    isGameStarted = false;
     newLevel.clearIntervals();
     newLevel.backSound.pause();
     if(newLevel.victorySound !== null){
@@ -48,29 +50,33 @@ function mute(){
 }
 
 function drawGamingPage() {
-    setTimeout(function () {
-        document.body.innerHTML = 
-        `<div class="wrapper-game">
-            <header class="stats-btns">
-                <div class="stats-btns">
-                <button id="btn-mute">Mute</button>
-                Lives:
-                    <div id="lives">3</div>
-                    <div><button id="btn-reset">Main Screen</button></div>
-                </div>        
-            </header>
-            <main id="game">
-                    <img id='win-game-over' alt='shark'>
-            </main>
-        </div>`;
-        var grid = document.getElementById("game");
-        newLevel = new Level(grid);
-        newLevel.startGame();
-        var resetBtn = document.getElementById("btn-reset");
-        var muteBtn = document.getElementById("btn-mute");
-        resetBtn.addEventListener("click", reset);
-        muteBtn.addEventListener("click", mute);
-    }, 1000);
+    if(isGameStarted === false){
+        isGameStarted = true;
+        setTimeout(function () {
+            document.body.innerHTML = 
+            `<div class="wrapper-game">
+                <header class="stats-btns">
+                    <div class="stats-btns">
+                    <button id="btn-mute">Mute</button>
+                    Lives:
+                        <div id="lives">3</div>
+                        <div><button id="btn-reset">Main Screen</button></div>
+                    </div>        
+                </header>
+                <main id="game">
+                        <img id='win-game-over' alt='shark'>
+                </main>
+            </div>`;
+            var grid = document.getElementById("game");
+            newLevel = new Level(grid);
+            newLevel.startGame();
+            var resetBtn = document.getElementById("btn-reset");
+            var muteBtn = document.getElementById("btn-mute");
+            resetBtn.addEventListener("click", reset);
+            muteBtn.addEventListener("click", mute);
+        }, 1000);
+    }
+
 }
 
 function init() {
